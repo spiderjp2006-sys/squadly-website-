@@ -75,9 +75,9 @@ body::before{
   content:"";
   position: fixed; inset:0;
   background:
-    radial-gradient(600px 400px at 15% -5%, rgba(139,92,246,0.18), transparent 60%),
-    radial-gradient(700px 500px at 100% 10%, rgba(59,107,251,0.14), transparent 60%),
-    radial-gradient(500px 500px at 50% 100%, rgba(139,92,246,0.10), transparent 60%);
+    radial-gradient(600px 400px at 15% -5%, rgba(139,92,246,0.12), transparent 60%),
+    radial-gradient(700px 500px at 100% 10%, rgba(59,107,251,0.09), transparent 60%),
+    radial-gradient(500px 500px at 50% 100%, rgba(139,92,246,0.06), transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -171,9 +171,9 @@ input, textarea, select{ font-family: inherit; color: var(--text-primary); }
 /* Hero escrow card */
 .hero-visual{ position:relative; }
 .glow-orb{
-  position:absolute; width:340px; height:340px; border-radius:50%;
-  background: radial-gradient(circle, rgba(139,92,246,0.55), transparent 70%);
-  filter: blur(10px); top:-60px; left:-40px; z-index:0; animation: float 7s ease-in-out infinite;
+  position:absolute; width:280px; height:280px; border-radius:50%;
+  background: radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%);
+  filter: blur(14px); top:-50px; left:-30px; z-index:0; animation: float 7s ease-in-out infinite;
 }
 @keyframes float{ 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-22px);} }
 
@@ -239,28 +239,39 @@ input, textarea, select{ font-family: inherit; color: var(--text-primary); }
 
 /* ---- Moderators ---- */
 .moderators{ padding: 40px 0 100px; }
-.mod-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.mod-layout{ display:grid; grid-template-columns: 1fr 270px; gap: 24px; align-items:start; }
+.mod-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .mod-card{
   background: var(--bg-card); border:1px solid var(--border-soft); border-radius: var(--radius-lg);
-  padding: 26px; text-align:center; transition: all .3s var(--ease);
+  padding: 22px; text-align:center; transition: all .3s var(--ease);
 }
 .mod-card:hover{ border-color: var(--border-strong); transform: translateY(-4px); }
 .mod-avatar{
-  width:74px; height:74px; border-radius:50%; margin:0 auto 16px; position:relative;
-  background: var(--grad-brand); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800;
+  width:60px; height:60px; border-radius:50%; margin:0 auto 12px; position:relative;
+  background: var(--grad-brand); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800;
   box-shadow: var(--shadow-glow-purple);
 }
 .mod-verified{
-  position:absolute; bottom:-2px; left:-2px; width:24px; height:24px; border-radius:50%;
+  position:absolute; bottom:-2px; left:-2px; width:20px; height:20px; border-radius:50%;
   background: var(--success); color:#04140b; display:flex; align-items:center; justify-content:center;
-  font-size:13px; border: 3px solid var(--bg-primary);
+  font-size:11px; border: 3px solid var(--bg-primary);
 }
-.mod-card h4{ font-size:16px; margin-bottom:4px; }
-.mod-card .role{ font-size:13px; color: var(--purple-300); margin-bottom:12px; }
-.mod-rating{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:13px; color: var(--text-secondary); margin-bottom:14px; }
+.mod-card h4{ font-size:15px; margin-bottom:3px; }
+.mod-card .role{ font-size:12.5px; color: var(--text-muted); margin-bottom:10px; }
+.mod-rating{ display:flex; align-items:center; justify-content:center; gap:5px; font-size:12.5px; color: var(--text-secondary); margin-bottom:12px; }
 .mod-rating b{ color:#ffc94d; }
-.mod-tags{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:18px; }
-.mod-tags span{ font-size:11px; background: rgba(255,255,255,0.05); border:1px solid var(--border-soft); padding:4px 10px; border-radius: var(--radius-pill); color: var(--text-secondary); }
+.mod-badge{ font-size:11px; font-weight:700; color: var(--success); background: var(--success-bg); border:1px solid rgba(47,214,127,0.35); padding:4px 14px; border-radius: var(--radius-pill); display:inline-block; }
+
+.mod-sidebar{
+  background: var(--bg-card); border:1px solid var(--border-soft); border-radius: var(--radius-lg); padding:22px; position:sticky; top: calc(var(--nav-h) + 20px);
+}
+.mod-sidebar h5{ display:flex; align-items:center; gap:8px; font-size:14px; margin-bottom:18px; }
+.live-dot{ width:8px; height:8px; border-radius:50%; background: var(--success); box-shadow:0 0 8px var(--success); animation: pulse 1.6s infinite; }
+.online-list{ display:flex; flex-direction:column; gap:14px; margin-bottom:20px; }
+.online-list li{ display:flex; align-items:center; gap:10px; }
+.mini-av{ width:34px; height:34px; border-radius:50%; background: var(--grad-brand); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0; }
+.online-list b{ display:block; font-size:13px; }
+.online-list span{ font-size:11.5px; color: var(--text-muted); }
 
 /* ---- Escrow flow ---- */
 .flow{ padding: 100px 0; background: var(--bg-secondary); border-top:1px solid var(--border-soft); border-bottom:1px solid var(--border-soft); }
@@ -475,7 +486,10 @@ tbody tr:last-child td{ border-bottom:none; }
    Responsive
    ========================================================================== */
 @media (max-width: 1080px){
-  .services-grid, .mod-grid{ grid-template-columns: repeat(2,1fr); }
+  .services-grid{ grid-template-columns: repeat(2,1fr); }
+  .mod-layout{ grid-template-columns: 1fr; }
+  .mod-sidebar{ position:static; order:-1; }
+  .mod-grid{ grid-template-columns: repeat(3,1fr); }
   .flow-grid{ grid-template-columns: repeat(2,1fr); row-gap:40px; }
   .flow-grid::before{ display:none; }
   .footer-grid{ grid-template-columns: 1fr 1fr; }
@@ -497,7 +511,6 @@ tbody tr:last-child td{ border-bottom:none; }
   .field-row{ flex-direction:column; gap:0; }
   .panel-head{ flex-direction:column; align-items:flex-start; }
   table{ display:block; overflow-x:auto; white-space:nowrap; }
-}
-@media (prefers-reduced-motion: reduce){
+}@media (prefers-reduced-motion: reduce){
   *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
