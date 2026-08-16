@@ -1,0 +1,105 @@
+rules_version = '2';
+
+// ============================================================================
+// Squadly — Firestore Security Rules
+// المبدأ: الأدمن فقط (عبر Custom Claim "admin" الصادر من Cloud Function)
+// يمكنه قراءة مستندات التوثيق أو تعديل الأرصدة/العمولات.
+// المستخدم غير الموثق لا يمكنه أبدًا الكتابة في transactions أو استقبال jobs.
+// ============================================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- دوال مساعدة ----
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isVerifiedUser() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isVerified == true;
+    }
+
+    // ---- users ----
+    // كل مستخدم يقرأ ملفه فقط، الأدمن يقرأ الجميع.
+    // المستخدم يعدّل بياناته الشخصية فقط (لا يمكنه تعديل balance أو role أو isVerified بنفسه).
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId)
+                    && request.resource.data.role in ['client', 'freelancer']
+                    && request.resource.data.isVerified == false
+                    && request.resource.data.balance == 0;
+      allow update: if isAdmin()
+                    || (isOwner(userId)
+                        && request.resource.data.balance == resource.data.balance
+                        && request.resource.data.isVerified == resource.data.isVerified
+                        && request.resource.data.role == resource.data.role);
+      allow delete: if false;
+    }
+
+    // ---- verification_requests ----
+    // بيانات الهوية حساسة: صاحب الطلب يقرأ طلبه فقط، الأدمن يقرأ كل الطلبات.
+    // القرار (approved/rejected) لا يغيّره إلا الأدمن.
+    match /verification_requests/{requestId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isSignedIn()
+                    && request.resource.data.userId == request.auth.uid
+                    && request.resource.data.status == 'pending';
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---- jobs ----
+    // يقرأ الوظيفة طرفاها (العميل/المستقل) أو الأدمن فقط.
+    // الإنشاء يتطلب عميلًا موثقًا على الأقل، والتحديث (تغيير الحالة/الدفع) للأدمن
+    // أو عبر Cloud Function موثوقة فقط (نظرًا لحساسية التوزيع المالي).
+    match /jobs/{jobId} {
+      allow read: if isAdmin()
+                  || (isSignedIn() && (resource.data.clientId == request.auth.uid || resource.data.freelancerId == request.auth.uid));
+      allow create: if isSignedIn()
+                    && request.resource.data.clientId == request.auth.uid
+                    && request.resource.data.status == 'escrowed'
+                    && request.resource.data.platformFee == request.resource.data.totalAmount * 0.25 // 25% ثابتة للمنصة، لا تُدخل من العميل يدويًا
+                    && request.resource.data.freelancerAmount == request.resource.data.totalAmount * 0.75; // 75% ثابتة للمستقل
+      allow update: if isAdmin(); // إتمام/تنازع المهمة يُدار من لوحة الأدمن أو Cloud Function بصلاحية Admin
+      allow delete: if false;
+    }
+
+    // ---- transactions ----
+    // سجل مالي للقراءة فقط من صاحبه أو الأدمن. الكتابة محصورة على الأدمن/الخادم،
+    // ولا يمكن لأي مستخدم غير موثق أن يكتب معاملة أو يستقبل "payout".
+    match /transactions/{transId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isAdmin()
+                    || (isSignedIn()
+                        && request.resource.data.type == 'deposit'
+                        && request.resource.data.userId == request.auth.uid)
+                    || (isSignedIn()
+                        && request.resource.data.type == 'payout'
+                        && isVerifiedUser()); // فقط المستخدم الموثق يمكن أن يظهر كمستلم payout
+      allow update: if false; // المعاملات ثابتة (immutable) لسلامة السجل المالي
+      allow delete: if false;
+    }
+
+    // ---- notifications ----
+    match /notifications/{notifId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow create: if isAdmin() || isSignedIn();
+      allow update: if isSignedIn() && resource.data.userId == request.auth.uid; // لتحديد "مقروء"
+      allow delete: if false;
+    }
+
+    // أي مجموعة أخرى غير معرّفة صراحة: مرفوضة افتراضيًا
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

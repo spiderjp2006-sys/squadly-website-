@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة تحكم الأدمن | Squadly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ GATE: يظهر حتى يتم التحقق من صلاحية الأدمن ============ -->
+<div id="authGate" style="min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:24px;">
+  <div>
+    <div style="font-size:40px; margin-bottom:14px;">🛡️</div>
+    <h2 style="margin-bottom:10px;">لوحة تحكم Squadly</h2>
+    <p style="color:var(--text-secondary); font-size:14.5px;" id="gateMessage">جاري التحقق من صلاحيات الدخول...</p>
+  </div>
+</div>
+
+<!-- ============ ADMIN DASHBOARD (مخفي حتى يتأكد التحقق) ============ -->
+<div class="admin-body" id="adminBody" style="display:none;">
+
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="admin-brand"><span class="brand-mark" style="width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--grad-brand);font-size:15px;">🛡️</span> Squadly Admin</div>
+
+    <nav class="admin-nav">
+      <a href="#overview" class="nav-item active" data-view="overview"><span class="ic">📊</span> نظرة عامة</a>
+      <a href="#verification" class="nav-item" data-view="verification"><span class="ic">🪪</span> طلبات التوثيق</a>
+      <a href="#transactions" class="nav-item" data-view="transactions"><span class="ic">💳</span> المعاملات المالية</a>
+      <a href="#jobs" class="nav-item" data-view="jobs"><span class="ic">📁</span> المهام</a>
+      <div class="nav-sep">النظام</div>
+      <a href="#" class="nav-item"><span class="ic">⚙️</span> الإعدادات</a>
+    </nav>
+
+    <div class="admin-user">
+      <div class="av" id="adminAvatar">A</div>
+      <div>
+        <b id="adminName">جاري التحميل...</b>
+        <span>مسؤول المنصة</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <h1 id="pageTitle">نظرة عامة</h1>
+        <p class="muted">تابع أداء Squadly وإدارة التوثيق والمعاملات المالية من مكان واحد.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn">تسجيل الخروج</button>
+    </div>
+
+    <!-- ---------------- STATS ---------------- -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="top"><div class="ic">💰</div><span class="trend up">+12.4%</span></div>
+        <div class="value mono" id="statSales">—</div>
+        <div class="label">إجمالي المبيعات (ج.م)</div>
+      </div>
+      <div class="stat-card">
+        <div class="top"><div class="ic">🧑‍💻</div><span class="trend up">+8</span></div>
+        <div class="value mono" id="statModerators">—</div>
+        <div class="label">عدد الموديريتورز الموثقين</div>
+      </div>
+      <div class="stat-card">
+        <div class="top"><div class="ic">🪪</div><span class="trend down" id="pendingTrend">—</span></div>
+        <div class="value mono" id="statPending">—</div>
+        <div class="label">طلبات توثيق معلّقة</div>
+      </div>
+      <div class="stat-card">
+        <div class="top"><div class="ic">📈</div><span class="trend up">25%</span></div>
+        <div class="value mono" id="statCommission">—</div>
+        <div class="label">إجمالي عمولة المنصة (ج.م)</div>
+      </div>
+    </div>
+
+    <!-- ---------------- VERIFICATION REQUESTS ---------------- -->
+    <section class="panel" id="verification">
+      <div class="panel-head">
+        <div>
+          <h3>طلبات التوثيق</h3>
+          <span class="sub">راجع الهوية وقرر الموافقة أو الرفض</span>
+        </div>
+        <div class="panel-tools">
+          <div class="filter-chip active" data-filter="all">الكل</div>
+          <div class="filter-chip" data-filter="pending">معلّقة</div>
+          <div class="filter-chip" data-filter="approved">موافَق عليها</div>
+          <div class="filter-chip" data-filter="rejected">مرفوضة</div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>المستخدم</th>
+            <th>مستند الهوية</th>
+            <th>Portfolio</th>
+            <th>تاريخ التقديم</th>
+            <th>الحالة</th>
+            <th>إجراء</th>
+          </tr>
+        </thead>
+        <tbody id="verificationTableBody"></tbody>
+      </table>
+      <div class="panel-empty" id="verificationEmpty" style="display:none;">لا توجد طلبات توثيق حتى الآن.</div>
+    </section>
+
+    <!-- ---------------- TRANSACTIONS ---------------- -->
+    <section class="panel" id="transactions">
+      <div class="panel-head">
+        <div>
+          <h3>المعاملات المالية</h3>
+          <span class="sub">الإيداعات، التحويلات، وعمولة المنصة</span>
+        </div>
+        <div class="search-box">🔍 <input type="text" id="transSearch" placeholder="ابحث عن مستخدم..."></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>المستخدم</th>
+            <th>نوع المعاملة</th>
+            <th>القيمة</th>
+            <th>التاريخ</th>
+          </tr>
+        </thead>
+        <tbody id="transactionsTableBody"></tbody>
+      </table>
+      <div class="panel-empty" id="transactionsEmpty" style="display:none;">لا توجد معاملات مالية بعد.</div>
+    </section>
+
+    <!-- ---------------- JOBS / ESCROW ---------------- -->
+    <section class="panel" id="jobs">
+      <div class="panel-head">
+        <div>
+          <h3>المهام ونظام الضمان</h3>
+          <span class="sub">اعتماد تسليم المهمة يوزّع المستحقات تلقائيًا 25% / 75%</span>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>المهمة</th>
+            <th>القيمة الإجمالية</th>
+            <th>التوزيع (منصة / مستقل)</th>
+            <th>الحالة</th>
+            <th>إجراء</th>
+          </tr>
+        </thead>
+        <tbody id="jobsTableBody"></tbody>
+      </table>
+      <div class="panel-empty" id="jobsEmpty" style="display:none;">لا توجد مهام حاليًا.</div>
+    </section>
+  </main>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script type="module">
+  import {
+    auth, db, watchAuthState, requireAdmin, logoutUser,
+    listenVerificationRequests, reviewVerificationRequest,
+    PLATFORM_FEE_RATE, FREELANCER_RATE,
+  } from "./firebase-config.js";
+  import {
+    collection, query, orderBy, onSnapshot, getDocs, doc, updateDoc, increment, addDoc, serverTimestamp, runTransaction, getDoc,
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  function showToast(message, type="success"){
+    const wrap = document.getElementById("toastWrap");
+    const el = document.createElement("div");
+    el.className = `toast ${type}`;
+    el.textContent = message;
+    wrap.appendChild(el);
+    setTimeout(()=> el.remove(), 4200);
+  }
+
+  /* =========================================================================
+     Admin Gate — لا تُعرض أي بيانات توثيق أو مالية قبل التأكد من الـ Admin
+     Custom Claim الصادر من الخادم (وليس من حقل role في Firestore وحده).
+     ========================================================================= */
+  // قائمة أدمن مسموح لهم عرضها (طبقة إضافية فقط) — الحماية الحقيقية الملزِمة
+  // هي Admin Custom Claim من requireAdmin(). أي محاولة دخول مباشرة بدون
+  // تسجيل دخول صحيح كأدمن تُعاد فورًا للصفحة الرئيسية.
+  const ALLOWED_ADMIN_EMAILS = ["matrix2006@gmail.com"];
+
+  watchAuthState(async (user)=>{
+    const gateMsg = document.getElementById("gateMessage");
+
+    if(!user){
+      gateMsg.textContent = "غير مصرح لك بالدخول، جاري التحويل...";
+      return redirectToHome();
+    }
+
+    try{
+      await requireAdmin(user); // يتحقق من admin Custom Claim الحقيقي على الخادم
+      if(!ALLOWED_ADMIN_EMAILS.includes(user.email)){
+        throw new Error("هذا الحساب غير مصرح له بلوحة التحكم");
+      }
+
+      document.getElementById("authGate").style.display = "none";
+      document.getElementById("adminBody").style.display = "flex";
+      document.getElementById("adminName").textContent = user.displayName || user.email;
+      document.getElementById("adminAvatar").textContent = (user.displayName || user.email || "A").slice(0,1).toUpperCase();
+      initDashboard();
+    }catch(err){
+      gateMsg.textContent = "🚫 غير مصرح لك، جاري التحويل...";
+      redirectToHome();
+    }
+  });
+
+  function redirectToHome(){
+    setTimeout(()=>{ window.location.href = "index.html"; }, 1500);
+  }
+
+  document.getElementById("logoutBtn").addEventListener("click", async ()=>{
+    await logoutUser();
+    location.reload();
+  });
+
+  /* ---------------- Sidebar navigation (SPA-lite scroll) ---------------- */
+  const titles = { overview: "نظرة عامة", verification: "طلبات التوثيق", transactions: "المعاملات المالية", jobs: "المهام" };
+  document.querySelectorAll(".admin-nav .nav-item").forEach(link=>{
+    link.addEventListener("click", (e)=>{
+      const view = link.dataset.view;
+      if(!view) return;
+      document.querySelectorAll(".admin-nav .nav-item").forEach(l=>l.classList.remove("active"));
+      link.classList.add("active");
+      document.getElementById("pageTitle").textContent = titles[view] || "نظرة عامة";
+    });
+  });
+
+  let allVerificationRequests = [];
+  let currentFilter = "all";
+
+  function initDashboard(){
+    /* ---- Live verification requests ---- */
+    listenVerificationRequests((requests)=>{
+      allVerificationRequests = requests;
+      renderVerificationTable();
+      updateStats();
+    });
+
+    /* ---- Live transactions ---- */
+    const transQ = query(collection(db, "transactions"), orderBy("timestamp", "desc"));
+    onSnapshot(transQ, (snap)=>{
+      renderTransactionsTable(snap.docs.map(d=>({ id:d.id, ...d.data() })));
+    });
+
+    /* ---- Live jobs ---- */
+    const jobsQ = query(collection(db, "jobs"), orderBy("createdAt", "desc"));
+    onSnapshot(jobsQ, (snap)=>{
+      renderJobsTable(snap.docs.map(d=>({ id:d.id, ...d.data() })));
+    });
+
+    /* ---- Verified moderators count ---- */
+    const usersQ = query(collection(db, "users"));
+    onSnapshot(usersQ, (snap)=>{
+      const verifiedCount = snap.docs.filter(d=> d.data().role === "freelancer" && d.data().isVerified).length;
+      document.getElementById("statModerators").textContent = verifiedCount;
+    });
+
+    document.querySelectorAll(".filter-chip").forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        document.querySelectorAll(".filter-chip").forEach(c=>c.classList.remove("active"));
+        chip.classList.add("active");
+        currentFilter = chip.dataset.filter;
+        renderVerificationTable();
+      });
+    });
+  }
+
+  function fmtDate(ts){
+    if(!ts?.toDate) return "—";
+    return ts.toDate().toLocaleDateString("ar-EG", { year:"numeric", month:"short", day:"numeric" });
+  }
+  function badgeLabel(status){
+    return { pending:"معلّق", approved:"مقبول", rejected:"مرفوض", escrowed:"محجوز بالضمان", completed:"مكتملة", disputed:"نزاع" }[status] || status;
+  }
+
+  /* ---------------- Render: verification table ---------------- */
+  function renderVerificationTable(){
+    const tbody = document.getElementById("verificationTableBody");
+    const empty = document.getElementById("verificationEmpty");
+    const rows = currentFilter === "all" ? allVerificationRequests : allVerificationRequests.filter(r=>r.status === currentFilter);
+
+    if(rows.length === 0){
+      tbody.innerHTML = ""; empty.style.display = "block"; return;
+    }
+    empty.style.display = "none";
+
+    tbody.innerHTML = rows.map(r=>`
+      <tr data-id="${r.id}" data-user="${r.userId}">
+        <td><div class="cell-user"><div class="av">${(r.userId||"?").slice(0,2).toUpperCase()}</div><div><b>مستخدم #${(r.userId||"").slice(0,6)}</b><span>${r.userId||""}</span></div></div></td>
+        <td>${r.nationalIdUrl ? `<a href="${r.nationalIdUrl}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">عرض المستند 🔒</a>` : "—"}</td>
+        <td>${r.portfolioUrl ? `<a href="${r.portfolioUrl}" target="_blank" rel="noopener">رابط الأعمال</a>` : "—"}</td>
+        <td>${fmtDate(r.submittedAt)}</td>
+        <td><span class="badge ${r.status}">${badgeLabel(r.status)}</span></td>
+        <td>
+          <div class="row-actions">
+            ${r.status === "pending" ? `
+              <button class="icon-btn approve" data-action="approve" title="موافقة">✓</button>
+              <button class="icon-btn reject" data-action="reject" title="رفض">✕</button>
+            ` : `<span style="color:var(--text-muted); font-size:12.5px;">تمت المراجعة</span>`}
+          </div>
+        </td>
+      </tr>
+    `).join("");
+
+    tbody.querySelectorAll("[data-action]").forEach(btn=>{
+      btn.addEventListener("click", async ()=>{
+        const tr = btn.closest("tr");
+        const requestId = tr.dataset.id;
+        const userId = tr.dataset.user;
+        const decision = btn.dataset.action === "approve" ? "approved" : "rejected";
+        btn.disabled = true;
+        try{
+          await reviewVerificationRequest(requestId, userId, decision);
+          showToast(decision === "approved" ? "تم توثيق المستخدم بنجاح ✅" : "تم رفض الطلب");
+        }catch(err){
+          showToast(err.message || "حدث خطأ", "error");
+        }finally{
+          btn.disabled = false;
+        }
+      });
+    });
+  }
+
+  /* ---------------- Render: transactions table ---------------- */
+  let totalSales = 0, totalCommission = 0;
+  function renderTransactionsTable(rows){
+    const tbody = document.getElementById("transactionsTableBody");
+    const empty = document.getElementById("transactionsEmpty");
+
+    totalSales = rows.filter(r=>r.type==="deposit").reduce((s,r)=> s + (r.amount||0), 0);
+    totalCommission = rows.filter(r=>r.type==="commission").reduce((s,r)=> s + (r.amount||0), 0);
+    document.getElementById("statSales").textContent = totalSales.toLocaleString("ar-EG");
+    document.getElementById("statCommission").textContent = totalCommission.toLocaleString("ar-EG");
+
+    if(rows.length === 0){ tbody.innerHTML = ""; empty.style.display = "block"; return; }
+    empty.style.display = "none";
+
+    const typeLabel = { deposit:"إيداع عميل", payout:"تحويل لمستقل", commission:"عمولة المنصة" };
+
+    tbody.innerHTML = rows.slice(0, 50).map(t=>`
+      <tr>
+        <td><div class="cell-user"><div class="av">${(t.userId||"?").slice(0,2).toUpperCase()}</div><div><b>${t.userId === "platform" ? "المنصة" : "مستخدم #" + (t.userId||"").slice(0,6)}</b></div></div></td>
+        <td>${typeLabel[t.type] || t.type}</td>
+        <td class="mono">${(t.amount||0).toLocaleString("ar-EG")} ج.م</td>
+        <td>${fmtDate(t.timestamp)}</td>
+      </tr>
+    `).join("");
+  }
+
+  /* ---------------- Render: jobs / escrow table ---------------- */
+  function renderJobsTable(rows){
+    const tbody = document.getElementById("jobsTableBody");
+    const empty = document.getElementById("jobsEmpty");
+
+    if(rows.length === 0){ tbody.innerHTML = ""; empty.style.display = "block"; return; }
+    empty.style.display = "none";
+
+    tbody.innerHTML = rows.map(j=>`
+      <tr data-id="${j.id}">
+        <td><b>${j.title || "بدون عنوان"}</b></td>
+        <td class="mono">${(j.totalAmount||0).toLocaleString("ar-EG")} ج.م</td>
+        <td class="split-mini"><span class="plat">منصة: ${(j.platformFee||0).toLocaleString("ar-EG")}</span> · <span class="free">مستقل: ${(j.freelancerAmount||0).toLocaleString("ar-EG")}</span></td>
+        <td><span class="badge ${j.status}">${badgeLabel(j.status)}</span></td>
+        <td>
+          ${j.status === "escrowed" ? `<button class="btn btn-primary btn-sm" data-action="payout">تأكيد التسليم وتحويل 75%</button>` : `<span style="color:var(--text-muted); font-size:12.5px;">—</span>`}
+        </td>
+      </tr>
+    `).join("");
+
+    tbody.querySelectorAll("[data-action='payout']").forEach(btn=>{
+      btn.addEventListener("click", async ()=>{
+        const jobId = btn.closest("tr").dataset.id;
+        btn.classList.add("btn-loading"); btn.disabled = true;
+        try{
+          await payoutJob(jobId);
+          showToast("تم تحويل المستحقات بنجاح 💰");
+        }catch(err){
+          showToast(err.message || "تعذر إتمام التحويل", "error");
+        }finally{
+          btn.classList.remove("btn-loading"); btn.disabled = false;
+        }
+      });
+    });
+  }
+
+  /* توزيع تلقائي من لوحة الأدمن — يطابق منطق completeJobAndPayout في firebase-config.js
+     ويُفضَّل استدعاء Cloud Function المكافئة (functions/index.js) في بيئة الإنتاج
+     لضمان تنفيذها خلف Custom Claims على الخادم حصريًا. */
+  async function payoutJob(jobId){
+    await runTransaction(db, async (t)=>{
+      const jobRef = doc(db, "jobs", jobId);
+      const jobSnap = await t.get(jobRef);
+      if(!jobSnap.exists()) throw new Error("المهمة غير موجودة");
+      const job = jobSnap.data();
+      if(job.status !== "escrowed") throw new Error("هذه المهمة ليست في حالة قابلة للتحويل");
+
+      const freelancerRef = doc(db, "users", job.freelancerId);
+      const freelancerSnap = await t.get(freelancerRef);
+      if(!freelancerSnap.exists() || !freelancerSnap.data().isVerified){
+        throw new Error("لا يمكن التحويل إلا لمستقل موثق");
+      }
+
+      t.update(freelancerRef, { balance: increment(job.freelancerAmount) });
+      t.update(jobRef, { status: "completed", completedAt: serverTimestamp() });
+
+      const payoutRef = doc(collection(db, "transactions"));
+      t.set(payoutRef, { userId: job.freelancerId, jobId, amount: job.freelancerAmount, type:"payout", timestamp: serverTimestamp() });
+
+      const commissionRef = doc(collection(db, "transactions"));
+      t.set(commissionRef, { userId: "platform", jobId, amount: job.platformFee, type:"commission", timestamp: serverTimestamp() });
+    });
+  }
+
+  function updateStats(){
+    const pendingCount = allVerificationRequests.filter(r=>r.status==="pending").length;
+    document.getElementById("statPending").textContent = pendingCount;
+    document.getElementById("pendingTrend").textContent = pendingCount > 0 ? `${pendingCount} جديد` : "0";
+  }
+</script>
+</body>
+</html>

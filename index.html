@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Squadly | سوادلي — منصة الوساطة الآمنة للمستقلين وأصحاب الأعمال</title>
+<meta name="description" content="Squadly تحمي أصحاب الأعمال والمستقلين عبر نظام ضمان مالي (Escrow) موثق، مع موديريتورز معتمدين ونسبة عمولة عادلة 25%.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="container">
+    <a href="#" class="brand">
+      <span class="brand-mark">🛡️</span>
+      Squadly
+    </a>
+
+    <nav class="nav-links">
+      <a href="#services">الخدمات</a>
+      <a href="#moderators">الموديريتورز</a>
+      <a href="#flow">نظام الضمان</a>
+      <a href="#footer-contact">تواصل معنا</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn btn-ghost btn-sm" data-open-modal="login">تسجيل الدخول</button>
+      <button class="btn btn-primary btn-sm" data-open-modal="register">إنشاء حساب</button>
+      <button class="nav-toggle" id="navToggle" aria-label="القائمة">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span> منصة وساطة موثقة 100%</span>
+      <h1>مستحقاتك محفوظة<br><span>حتى تسليم آخر تفصيلة.</span></h1>
+      <p class="lead">Squadly تربط أصحاب الأعمال بموديريتورز ومستقلين موثقين، وتحجز المبلغ كاملاً في حساب ضمان حتى اكتمال المهمة — فلا نصب، ولا تأخير، ولا مفاجآت.</p>
+
+      <div class="hero-cta">
+        <button class="btn btn-primary" data-open-modal="register">ابدأ الآن مجانًا</button>
+        <button class="btn btn-outline" data-open-modal="verify">تقدم بطلب توثيق</button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><b>+2,400</b><span>مستقل موثق</span></div>
+        <div class="stat"><b>+18,900</b><span>مهمة مكتملة</span></div>
+        <div class="stat"><b>99.2%</b><span>معدل رضا العملاء</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="glow-orb"></div>
+      <div class="escrow-card">
+        <div class="escrow-card-head">
+          <h4>مهمة: تصميم هوية بصرية</h4>
+          <span class="escrow-badge"><span class="pulse"></span> محجوز في الضمان</span>
+        </div>
+
+        <div class="escrow-amount">8,000 <small>ج.م</small></div>
+
+        <div class="escrow-split">
+          <div class="split-box freelancer">
+            <span>للمستقل (75%)</span>
+            <b>6,000 ج.م</b>
+          </div>
+          <div class="split-box platform">
+            <span>عمولة المنصة (25%)</span>
+            <b>2,000 ج.م</b>
+          </div>
+        </div>
+
+        <div class="escrow-track">
+          <div class="track-step done"><div class="node">✓</div><span>الإيداع</span></div>
+          <div class="track-step done"><div class="node">✓</div><span>التنفيذ</span></div>
+          <div class="track-step"><div class="node">3</div><span>المراجعة</span></div>
+          <div class="track-step"><div class="node">4</div><span>التحويل</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST BAR ================= -->
+<div class="trust-bar">
+  <div class="container">
+    <div class="trust-item"><span class="ic">🔒</span> تشفير بيانات كامل</div>
+    <div class="trust-item"><span class="ic">🛡️</span> ضمان استرداد الأموال</div>
+    <div class="trust-item"><span class="ic">✅</span> هويات موثقة يدويًا</div>
+    <div class="trust-item"><span class="ic">⚖️</span> نظام تحكيم للنزاعات</div>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> الخدمات السريعة</span>
+      <h2>كل التخصصات، تحت حماية واحدة</h2>
+      <p>اختر التخصص المطلوب وسنطابقك مع موديريتور أو مستقل موثق خلال دقائق.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎧</div>
+        <h3>خدمة العملاء</h3>
+        <p>فرق مدربة للرد على العملاء وإدارة الاستفسارات على مدار الساعة بجودة احترافية.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🗂️</div>
+        <h3>إدارة المحتوى</h3>
+        <p>موديريتورز لإدارة المجتمعات والسيرفرات ومنصات التواصل بأعلى معايير الانضباط.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎨</div>
+        <h3>التصميم</h3>
+        <p>مصممون موثقون لهويات بصرية، واجهات، ومحتوى إبداعي جاهز للاستخدام فورًا.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>البرمجة</h3>
+        <p>مطورون موثقون لتطبيقات الويب والموبايل والبوتات، بعقود عمل محمية بالضمان.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VERIFIED MODERATORS ================= -->
+<section class="moderators" id="moderators">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="dot"></span> Verified Moderators</span>
+      <h2>موديريتورز حاصلون على شارة التوثيق</h2>
+      <p>كل من تراه هنا مرّ بعملية تحقق من الهوية ومراجعة أعمال سابقة قبل ظهوره على المنصة.</p>
+    </div>
+
+    <div class="mod-grid">
+      <div class="mod-card">
+        <div class="mod-avatar">SA<span class="mod-verified">✓</span></div>
+        <h4>سارة أحمد</h4>
+        <div class="role">إدارة مجتمعات ديسكورد</div>
+        <div class="mod-rating">⭐ <b>4.9</b> (212 تقييم)</div>
+        <div class="mod-tags"><span>Discord</span><span>مجتمعات</span><span>عربي/إنجليزي</span></div>
+        <button class="btn btn-ghost btn-sm btn-block" data-open-modal="register">تواصل الآن</button>
+      </div>
+      <div class="mod-card">
+        <div class="mod-avatar">MK<span class="mod-verified">✓</span></div>
+        <h4>محمد كريم</h4>
+        <div class="role">مطور واجهات أمامية</div>
+        <div class="mod-rating">⭐ <b>5.0</b> (98 تقييم)</div>
+        <div class="mod-tags"><span>React</span><span>UI/UX</span><span>تطبيقات ويب</span></div>
+        <button class="btn btn-ghost btn-sm btn-block" data-open-modal="register">تواصل الآن</button>
+      </div>
+      <div class="mod-card">
+        <div class="mod-avatar">LH<span class="mod-verified">✓</span></div>
+        <h4>ليلى حسن</h4>
+        <div class="role">مصممة هوية بصرية</div>
+        <div class="mod-rating">⭐ <b>4.8</b> (156 تقييم)</div>
+        <div class="mod-tags"><span>Branding</span><span>Figma</span><span>سوشيال ميديا</span></div>
+        <button class="btn btn-ghost btn-sm btn-block" data-open-modal="register">تواصل الآن</button>
+      </div>
+      <div class="mod-card">
+        <div class="mod-avatar">YO<span class="mod-verified">✓</span></div>
+        <h4>يوسف عمر</h4>
+        <div class="role">خدمة عملاء ودعم فني</div>
+        <div class="mod-rating">⭐ <b>4.9</b> (301 تقييم)</div>
+        <div class="mod-tags"><span>دعم فني</span><span>24/7</span><span>Zendesk</span></div>
+        <button class="btn btn-ghost btn-sm btn-block" data-open-modal="register">تواصل الآن</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESCROW FLOW ================= -->
+<section class="flow" id="flow">
+  <div class="container">
+    <div class="section-head" style="margin-inline:auto; text-align:center; max-width:600px;">
+      <span class="eyebrow"><span class="dot"></span> Escrow Process</span>
+      <h2>كيف تُحفظ مستحقاتك؟</h2>
+      <p>أربع خطوات بسيطة، محكومة بالكامل عبر نظام ضمان مالي شفاف.</p>
+    </div>
+
+    <div class="flow-grid">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <h4>إيداع المبلغ</h4>
+        <p>يدفع صاحب العمل القيمة كاملة، وتُحجز فورًا في حساب الضمان الخاص بالمنصة.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <h4>تنفيذ المهمة</h4>
+        <p>يبدأ المستقل الموثق العمل وهو مطمئن أن مستحقاته محفوظة بالكامل.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <h4>المراجعة والتسليم</h4>
+        <p>يراجع صاحب العمل التسليم ويؤكد الاستلام، أو يفتح نزاعًا إن لزم الأمر.</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <h4>التحويل التلقائي</h4>
+        <p>يُحوَّل 75% لرصيد المستقل فورًا، وتحتسب المنصة عمولتها 25% تلقائيًا.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA BANNER ================= -->
+<div class="container">
+  <div class="cta-banner">
+    <h2>جاهز تبدأ بأمان؟</h2>
+    <p>انضم إلى آلاف أصحاب الأعمال والمستقلين اللي بيشتغلوا بثقة على Squadly.</p>
+    <div class="hero-cta">
+      <button class="btn btn-primary" data-open-modal="register">إنشاء حساب مجاني</button>
+      <button class="btn btn-ghost" data-open-modal="verify">التقديم كموديريتور موثق</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer id="footer-contact">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="brand" style="margin-bottom:14px; display:flex;"><span class="brand-mark">🛡️</span> Squadly</a>
+        <p style="color:var(--text-secondary); font-size:14px; max-width:320px;">منصة وساطة مالية آمنة تحمي حقوق أصحاب الأعمال والمستقلين عبر نظام ضمان (Escrow) موثق بالكامل.</p>
+      </div>
+      <div>
+        <h5>المنصة</h5>
+        <ul>
+          <li><a href="#services">الخدمات</a></li>
+          <li><a href="#moderators">الموديريتورز</a></li>
+          <li><a href="#flow">نظام الضمان</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>الحساب</h5>
+        <ul>
+          <li><a href="#" data-open-modal="login">تسجيل الدخول</a></li>
+          <li><a href="#" data-open-modal="register">إنشاء حساب</a></li>
+          <li><a href="#" data-open-modal="verify">طلب توثيق</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>الدعم</h5>
+        <ul>
+          <li><a href="mailto:support@squadly.com">support@squadly.com</a></li>
+          <li><a href="#">مركز المساعدة</a></li>
+          <li><a href="#">سياسة الخصوصية</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Squadly. جميع الحقوق محفوظة.</span>
+      <span id="versionTrigger" style="cursor:default; user-select:none;">v1.0.4</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= AUTH MODAL ================= -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+
+    <div class="modal-tabs">
+      <div class="modal-tab" data-tab="login">تسجيل الدخول</div>
+      <div class="modal-tab" data-tab="register">حساب جديد</div>
+      <div class="modal-tab" data-tab="verify">طلب توثيق</div>
+    </div>
+
+    <!-- ---- Login Panel ---- -->
+    <div class="modal-panel" data-panel="login">
+      <h3>مرحبًا بعودتك 👋</h3>
+      <p class="sub">سجّل دخولك لمتابعة مهامك ومستحقاتك.</p>
+      <form id="loginForm" novalidate>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" name="email" placeholder="example@mail.com" required>
+          <div class="error-msg">يرجى إدخال بريد إلكتروني صالح</div>
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" name="password" placeholder="••••••••" required>
+          <div class="error-msg">كلمة المرور مطلوبة</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">تسجيل الدخول</button>
+        <p class="form-note">ليس لديك حساب؟ <a data-switch-tab="register">أنشئ حسابًا جديدًا</a></p>
+      </form>
+    </div>
+
+    <!-- ---- Register Panel ---- -->
+    <div class="modal-panel" data-panel="register">
+      <h3>أنشئ حسابك في Squadly</h3>
+      <p class="sub">اختر نوع حسابك للبدء.</p>
+      <form id="registerForm" novalidate>
+        <div class="role-pick">
+          <label class="role-opt checked">
+            <input type="radio" name="role" value="client" checked>
+            👔 صاحب عمل
+          </label>
+          <label class="role-opt">
+            <input type="radio" name="role" value="freelancer">
+            🧑‍💻 مستقل / موديريتور
+          </label>
+        </div>
+        <div class="field">
+          <label>الاسم الكامل</label>
+          <input type="text" name="name" placeholder="اسمك بالكامل" required minlength="3">
+          <div class="error-msg">الاسم يجب أن يكون 3 أحرف على الأقل</div>
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" name="email" placeholder="example@mail.com" required>
+          <div class="error-msg">يرجى إدخال بريد إلكتروني صالح</div>
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" name="password" placeholder="8 أحرف على الأقل، تحتوي أرقام" required minlength="8">
+          <div class="error-msg">كلمة المرور ضعيفة — استخدم 8 أحرف وأرقام على الأقل</div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="registerBtn">إنشاء الحساب</button>
+        <p class="form-note">لديك حساب بالفعل؟ <a data-switch-tab="login">سجّل الدخول</a></p>
+      </form>
+    </div>
+
+    <!-- ---- Verify Panel ---- -->
+    <div class="modal-panel" data-panel="verify">
+      <h3>طلب حساب موثق ✓</h3>
+      <p class="sub">التوثيق يمنحك شارة Verified ويسمح لك باستقبال المهام والمستحقات.</p>
+      <form id="verifyForm" novalidate>
+        <div class="field">
+          <label>صورة إثبات الهوية</label>
+          <div class="file-drop" id="fileDropZone">
+            📎 اضغط لرفع صورة البطاقة الشخصية / الهوية
+            <div class="fname" id="fileName"></div>
+          </div>
+          <input type="file" id="nationalIdInput" accept="image/*,application/pdf" style="display:none">
+          <div class="hint">لن تُعرض هذه الصورة لأي طرف سوى فريق التوثيق في Squadly.</div>
+        </div>
+        <div class="field">
+          <label>رابط أعمال سابقة (Portfolio)</label>
+          <input type="url" name="portfolioUrl" placeholder="https://behance.net/username">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="verifyBtn">إرسال طلب التوثيق</button>
+        <p class="form-note">مراجعة الطلبات تستغرق عادة من 24 إلى 48 ساعة.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ================= SECRET ADMIN MODAL ================= -->
+<!-- لا يظهر إلا بعد 5 ضغطات على رقم الإصدار أسفل الفوتر -->
+<div class="modal-overlay" id="secretAdminModal">
+  <div class="modal">
+    <button class="modal-close" id="secretModalClose">✕</button>
+    <h3>دخول مسؤولي المنصة</h3>
+    <p class="sub">هذه البوابة مخصصة لفريق إدارة Squadly فقط.</p>
+    <form id="secretAdminForm" novalidate>
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" name="email" placeholder="admin@squadly.com" required autocomplete="off">
+        <div class="error-msg">بريد إلكتروني غير صالح</div>
+      </div>
+      <div class="field">
+        <label>كلمة المرور</label>
+        <input type="password" name="password" placeholder="••••••••" required autocomplete="off">
+        <div class="error-msg">كلمة المرور مطلوبة</div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="secretAdminBtn">دخول لوحة التحكم</button>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+  import {
+    auth, watchAuthState, loginUser, registerUser, submitVerificationRequest, getUserProfile, logoutUser,
+    checkRateLimit, adminLogin,
+  } from "./firebase-config.js";
+
+  /* ---------------- Modal + Tabs ---------------- */
+  const overlay = document.getElementById("authModal");
+  const tabs = document.querySelectorAll(".modal-tab");
+  const panels = document.querySelectorAll(".modal-panel");
+
+  function openModal(tabName){
+    overlay.classList.add("active");
+    switchTab(tabName || "login");
+    document.body.style.overflow = "hidden";
+  }
+  function closeModal(){
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+  function switchTab(name){
+    tabs.forEach(t => t.classList.toggle("active", t.dataset.tab === name));
+    panels.forEach(p => p.classList.toggle("active", p.dataset.panel === name));
+  }
+
+  document.querySelectorAll("[data-open-modal]").forEach(el=>{
+    el.addEventListener("click", (e)=>{ e.preventDefault(); openModal(el.dataset.openModal); });
+  });
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeModal(); });
+  tabs.forEach(t => t.addEventListener("click", ()=> switchTab(t.dataset.tab)));
+  document.querySelectorAll("[data-switch-tab]").forEach(el=>{
+    el.addEventListener("click", (e)=>{ e.preventDefault(); switchTab(el.dataset.switchTab); });
+  });
+
+  /* ---------------- Role picker visual ---------------- */
+  document.querySelectorAll(".role-opt").forEach(opt=>{
+    opt.addEventListener("click", ()=>{
+      document.querySelectorAll(".role-opt").forEach(o=>o.classList.remove("checked"));
+      opt.classList.add("checked");
+      opt.querySelector("input").checked = true;
+    });
+  });
+
+  /* ---------------- Toasts ---------------- */
+  function showToast(message, type="success"){
+    const wrap = document.getElementById("toastWrap");
+    const el = document.createElement("div");
+    el.className = `toast ${type}`;
+    el.textContent = message;
+    wrap.appendChild(el);
+    setTimeout(()=> el.remove(), 4200);
+  }
+
+  /* ---------------- Field validation helper ---------------- */
+  function setFieldError(input, hasError){
+    const field = input.closest(".field");
+    field.classList.toggle("has-error", hasError);
+  }
+
+  /* ---------------- Login ---------------- */
+  const loginForm = document.getElementById("loginForm");
+  loginForm.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const btn = document.getElementById("loginBtn");
+    const email = loginForm.email.value.trim();
+    const password = loginForm.password.value;
+
+    setFieldError(loginForm.email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    setFieldError(loginForm.password, password.length === 0);
+    if(!email || !password) return;
+
+    btn.classList.add("btn-loading"); btn.disabled = true;
+    try{
+      await loginUser({ email, password });
+      showToast("تم تسجيل الدخول بنجاح ✅");
+      closeModal();
+    }catch(err){
+      showToast(mapAuthError(err), "error");
+    }finally{
+      btn.classList.remove("btn-loading"); btn.disabled = false;
+    }
+  });
+
+  /* ---------------- Register ---------------- */
+  const registerForm = document.getElementById("registerForm");
+  registerForm.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const btn = document.getElementById("registerBtn");
+    const name = registerForm.name.value.trim();
+    const email = registerForm.email.value.trim();
+    const password = registerForm.password.value;
+    const role = registerForm.role.value;
+
+    setFieldError(registerForm.name, name.length < 3);
+    setFieldError(registerForm.email, !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+    setFieldError(registerForm.password, !(password.length >= 8 && /[0-9]/.test(password)));
+    if(name.length < 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || password.length < 8) return;
+
+    btn.classList.add("btn-loading"); btn.disabled = true;
+    try{
+      await registerUser({ name, email, password, role });
+      showToast("تم إنشاء حسابك بنجاح 🎉");
+      closeModal();
+    }catch(err){
+      showToast(mapAuthError(err), "error");
+    }finally{
+      btn.classList.remove("btn-loading"); btn.disabled = false;
+    }
+  });
+
+  /* ---------------- Verify ---------------- */
+  const dropZone = document.getElementById("fileDropZone");
+  const fileInput = document.getElementById("nationalIdInput");
+  const fileNameEl = document.getElementById("fileName");
+  let selectedFile = null;
+
+  dropZone.addEventListener("click", ()=> fileInput.click());
+  fileInput.addEventListener("change", ()=>{
+    if(fileInput.files[0]){
+      selectedFile = fileInput.files[0];
+      fileNameEl.textContent = `✅ ${selectedFile.name}`;
+      fileNameEl.style.display = "block";
+    }
+  });
+
+  const verifyForm = document.getElementById("verifyForm");
+  verifyForm.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const btn = document.getElementById("verifyBtn");
+
+    if(!auth.currentUser){
+      showToast("يجب تسجيل الدخول أولاً لإرسال طلب التوثيق", "error");
+      switchTab("login");
+      return;
+    }
+    if(!selectedFile){
+      showToast("يرجى إرفاق صورة الهوية أولاً", "error");
+      return;
+    }
+
+    btn.classList.add("btn-loading"); btn.disabled = true;
+    try{
+      await submitVerificationRequest({
+        uid: auth.currentUser.uid,
+        nationalIdFile: selectedFile,
+        portfolioUrl: verifyForm.portfolioUrl.value.trim(),
+      });
+      showToast("تم إرسال طلب التوثيق بنجاح، سنراجعه قريبًا ✅");
+      closeModal();
+    }catch(err){
+      showToast(err.message || "حدث خطأ أثناء إرسال الطلب", "error");
+    }finally{
+      btn.classList.remove("btn-loading"); btn.disabled = false;
+    }
+  });
+
+  function mapAuthError(err){
+    const code = err.code || "";
+    if(code.includes("email-already-in-use")) return "هذا البريد مستخدم بالفعل";
+    if(code.includes("user-not-found") || code.includes("wrong-password") || code.includes("invalid-credential")) return "بيانات الدخول غير صحيحة";
+    if(code.includes("too-many-requests")) return "محاولات كثيرة، حاول لاحقًا";
+    return err.message || "حدث خطأ غير متوقع";
+  }
+
+  /* ---------------- Auth state -> update navbar ---------------- */
+  watchAuthState(async (user)=>{
+    const actions = document.querySelector(".nav-actions");
+    if(user){
+      const profile = await getUserProfile(user.uid).catch(()=>null);
+      const displayName = profile?.name || user.displayName || "حسابي";
+      actions.innerHTML = `
+        <span class="btn btn-ghost btn-sm" style="pointer-events:none;">👋 ${displayName}</span>
+        <button class="btn btn-primary btn-sm" id="logoutBtn">تسجيل الخروج</button>
+        <button class="nav-toggle" id="navToggle" aria-label="القائمة">☰</button>
+      `;
+      document.getElementById("logoutBtn").addEventListener("click", async ()=>{
+        await logoutUser();
+        location.reload();
+      });
+    }
+  });
+
+  /* ---------------- Hidden admin trigger (5 clicks on version label) ---------------- */
+  const versionTrigger = document.getElementById("versionTrigger");
+  const secretModal = document.getElementById("secretAdminModal");
+  let clickCount = 0;
+  let clickTimer = null;
+
+  versionTrigger.addEventListener("click", ()=>{
+    clickCount++;
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(()=>{ clickCount = 0; }, 1500); // إعادة الضبط لو توقف عن الضغط المتتالي
+
+    if(clickCount >= 5){
+      clickCount = 0;
+      secretModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+  });
+
+  document.getElementById("secretModalClose").addEventListener("click", ()=>{
+    secretModal.classList.remove("active");
+    document.body.style.overflow = "";
+  });
+  secretModal.addEventListener("click", (e)=>{ if(e.target === secretModal){ secretModal.classList.remove("active"); document.body.style.overflow=""; } });
+
+  const secretForm = document.getElementById("secretAdminForm");
+  secretForm.addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    const btn = document.getElementById("secretAdminBtn");
+
+    // Rate limit مستقل خاص ببوابة الأدمن السرية لمنع محاولات التخمين المتكررة
+    const rl = checkRateLimit("secret_admin_login");
+    if(!rl.allowed){
+      showToast(`محاولات كثيرة جدًا، حاول بعد ${rl.secondsLeft} ثانية`, "error");
+      return;
+    }
+
+    const email = secretForm.email.value.trim();
+    const password = secretForm.password.value;
+
+    btn.classList.add("btn-loading"); btn.disabled = true;
+    try{
+      // adminLogin تسجّل الدخول عبر Firebase Auth الحقيقي، ثم تتحقق من
+      // Admin Custom Claim الصادر من الخادم — وتسجّل خروج المستخدم فورًا
+      // لو لم يكن أدمن، حتى لا يبقى أي جلسة مفتوحة بالخطأ.
+      await adminLogin({ email, password });
+      showToast("جاري تحويلك للوحة التحكم...");
+      window.location.href = "admin.html";
+    }catch(err){
+      showToast(err.message || "بيانات الدخول غير صحيحة", "error");
+    }finally{
+      btn.classList.remove("btn-loading"); btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>

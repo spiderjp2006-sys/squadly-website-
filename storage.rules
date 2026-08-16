@@ -1,0 +1,49 @@
+rules_version = '2';
+
+// ============================================================================
+// Squadly — Firebase Storage Security Rules
+// ملفات التوثيق (صور الهوية) لا يقرأها إلا صاحبها أو الأدمن.
+// حجم الملف وامتداده محدودان لمنع رفع ملفات ضارة (Malware / oversized upload).
+// ============================================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidDoc() {
+      return request.resource.size < 8 * 1024 * 1024 // 8MB كحد أقصى
+             && request.resource.contentType.matches('image/.*|application/pdf');
+    }
+
+    // مستندات التوثيق (بطاقة الهوية) — خاصة تمامًا
+    // القراءة: صاحب الملف نفسه أو الأدمن فقط (Verified Reviewer Role)
+    // الكتابة: صاحب الحساب فقط، وبشرط نوع/حجم ملف صالح
+    match /verification_docs/{userId}/{fileName} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isOwner(userId) && isValidDoc();
+      allow delete: if isAdmin();
+    }
+
+    // صور البروفايل العامة — يمكن للجميع رؤيتها، فقط صاحبها يرفعها
+    match /avatars/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId) && isValidDoc();
+    }
+
+    // أي مسار آخر غير معرّف: مرفوض افتراضيًا
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
